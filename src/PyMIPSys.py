@@ -257,9 +257,9 @@ class JoomlaChecker(threading.Thread):
                 database=self.db
             )
         except Exception as e:
-            print(e)
             logging.error(e)
             self.con = None
+            raise
 
     def run(self):
         old = None
@@ -312,9 +312,9 @@ class WordpressChecker(threading.Thread):
                 database=self.db
             )
         except Exception as e:
-            print(e)
             logging.error(e)
             self.con = None
+            raise
 
     def run(self):
         old = None
@@ -444,7 +444,7 @@ def banIP(IP):
     with open(path,'w') as json_file:
         json.dump(ban_list, json_file)
 
-def PyMIPSys(username,password,seconds=None):
+def PyMIPSys(username,password,config,seconds=None):
     
     ### Parsing for the password
     if not password:
@@ -475,7 +475,7 @@ def PyMIPSys(username,password,seconds=None):
     print("Started!")
     if seconds is None:
         while True:
-            time.sleep(10)
+            time.sleep(1)
     else:
         time.sleep(seconds) # For debugging just run a few seconds
 
@@ -496,7 +496,7 @@ def PyMIPSys(username,password,seconds=None):
 if __name__ =="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-u","--user", help="Username of the database")
-    parser.add_argument("-p","--password", help="Use a password to log in to the database",action='store_true')
+    parser.add_argument("-p","--password", help="Use a password to log in to the database")
     args = parser.parse_args()
     config = read_ini(os.path.join(os.getcwd(),'ban_settings.ini'))
 
@@ -508,4 +508,4 @@ if __name__ =="__main__":
         handler = logging.FileHandler(config["LOGGING"].get("FILENAME"),'w','utf-8')
         root_logger.addHandler(handler)
 
-    PyMIPSys(args.username,args.password)
+    PyMIPSys(args.user,args.password,config)
