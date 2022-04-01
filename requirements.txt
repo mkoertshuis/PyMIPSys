@@ -1,0 +1,7 @@
+mysql-connector-python
+# pymysql
+configparser
+argparse
+numpy
+# re
+pyufw
