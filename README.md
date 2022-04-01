@@ -19,9 +19,9 @@ For this program to work for wordpres the [WP Activity Log](https://wordpress.or
 To run the program it needs access to the sql database. You can parse the username and password as follows:
 
 ```bash
-python3 fail2ban.py -u <username> -p <password>
+python3 PyMIPSys.py -u <username> -p <password>
 ```
 
 ## Configuration
 
-The program is configurable with ban_settings.ini. Make sure this file is in the same folder as fail2ban.py and monitor.py. Here you can enable and disable all the modules separately.
+The program is configurable with ban_settings.ini. Make sure this file is in the same folder as PyMIPSys.py. Here you can enable and disable all the modules separately.
